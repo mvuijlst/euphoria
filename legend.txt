@@ -1,0 +1,26 @@
+A - Acres of land last year
+B - Births
+C - Crop yield
+D - Natural deaths
+E - Grain eaten by rats
+F - Grain eaten for food
+G - Grain last year (bushels)
+H - Hire for mercenaries
+I
+J - Cumulative war and starvation
+K - War casualties
+L - Land deals (in grain)
+M - Looting victims (murders?)
+N - Input
+O - Looting losses
+P - Population last year
+Q - Grain planted
+R - A random number
+S - Starvations
+T - Acres traded
+U - Acres won or lost
+V - Disease victims
+W - Probability of war (x100)
+X - Crop yield/acre
+Y - Current year and locust cycle
+Z - Fruits of war
