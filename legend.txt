@@ -1,26 +1,26 @@
-A - Acres of land last year
-B - Births
-C - Crop yield
-D - Natural deaths
-E - Grain eaten by rats
-F - Grain eaten for food
-G - Grain last year (bushels)
-H - Hire for mercenaries
+A - Acres of land last year             acres
+B - Births                              births
+C - Crop yield                          cropyield
+D - Natural deaths                      naturaldeaths
+E - Grain eaten by rats                 grain_rats
+F - Grain eaten for food                grain_food
+G - Grain last year (bushels)           grain
+H - Hire for mercenaries                hire_mercenaries
 I
-J - Cumulative war and starvation
-K - War casualties
-L - Land deals (in grain)
-M - Looting victims (murders?)
-N - Input
-O - Looting losses
-P - Population last year
-Q - Grain planted
+J - Cumulative war and starvation       war_starvation
+K - War casualties                      war_casualties
+L - Land deals (in grain)               land_deals
+M - Looting victims (murders?)          looting_victims
+N - Input                               input
+O - Looting losses                      looting_losses
+P - Population last year                population
+Q - Grain planted                       grain_planted
 R - A random number
-S - Starvations
-T - Acres traded
-U - Acres won or lost
-V - Disease victims
-W - Probability of war (x100)
-X - Crop yield/acre
-Y - Current year and locust cycle
-Z - Fruits of war
+S - Starvations                         starvations
+T - Acres traded                        acres_traded
+U - Acres won or lost                   acres_wonlost
+V - Disease victims                     disease_victims
+W - Probability of war (x100)           war_probability
+X - Crop yield/acre                     crop_yield
+Y - Current year and locust cycle       year
+Z - Fruits of war                       fruits_war
