@@ -21,6 +21,6 @@ T - Acres traded                        acres_traded
 U - Acres won or lost                   acres_wonlost
 V - Disease victims                     disease_victims
 W - Probability of war (x100)           war_probability
-X - Crop yield/acre                     crop_yield
+X - Crop yield/acre                     yield_acre
 Y - Current year and locust cycle       year
 Z - Fruits of war                       fruits_war
