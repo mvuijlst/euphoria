@@ -166,7 +166,7 @@ def state(kingdom):
         print("You and the remaining population retire in the Swiss Alps.\n")
         kingdom.stop = True
 
-    if kinggdom.stop == False:
+    if kingdom.stop == False:
 
         #make land deals
         grain_price = 23+randrange(8)
@@ -224,12 +224,12 @@ def state(kingdom):
         while not ok:
             print("How many bushels to you wish to use as food?")
             kingdom.grain_food = int(input())
-            if kingdom.grain_food > 0:
+            if kingdom.grain_food >= 0:
+                ok = True
                 if kingdom.grain + kingdom.land_deals - kingdom.grain_planted - kingdom.grain_food >= 0:
                     if kingdom.grain_food <= 40 * kingdom.population:
                         kingdom.starvations = kingdom.population - int(kingdom.grain_food/40)
                         kingdom.war_starvation = kingdom.war_starvation + kingdom.starvations
-                        ok = True
 
         kingdom.yield_acre = 5 + randrange(4)
 
@@ -306,11 +306,11 @@ def state(kingdom):
             else:
                 kingdom.hire_mercenaries = kingdom.input * 80
             
-        kingdom.input = kingdom.population - kingdom.starvations - kingdom.war_casualities - kingdom.looting_victims
+        kingdom.input = kingdom.population - kingdom.starvations - kingdom.war_casualties - kingdom.looting_victims
 
         if randrange(99) < 4:
             print("The black plague strikes.")
-            print kingdom.disease_victims = int(kingdom.input / 2)
+            kingdom.disease_victims = int(kingdom.input / 2)
         elif randrange(99) < 20:
             print("A pox epidemic breaks out.")
             kingdom.disease_victims = int(kingdom.input / 20)
