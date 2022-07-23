@@ -27,11 +27,13 @@ class State:
         self.yield_acre = 0
         self.year = randrange(6)+1
         self.fruits_war = 0
+        self.stop = False
 
 def main():
     kingdom = State()
     init(kingdom)
-    state(kingdom)
+    while kingdom.stop == False:
+        state(kingdom)
 
 def init(kingdom):
     cls()
@@ -75,7 +77,7 @@ def initPopGrainVectors(kingdom):
 
 def state(kingdom):
     print("State of the Kingdom\n")
-    print("Year", int(kingdom.year/7))
+    print("Year", int(kingdom.year / 7))
     print("Population", kingdom.population)
 
     if (kingdom.births > 0):
@@ -158,91 +160,171 @@ def state(kingdom):
 
     if kingdom.war_starvation >= 100:
         print("The peasants tire of war and starvation. You are deposed.\n")
-        #TODO end
+        kingdom.stop = True
 
     if kingdom.population <= 1:
         print("You and the remaining population retire in the Swiss Alps.\n")
-        #TODO end
+        kingdom.stop = True
 
-    #make land deals
-    grain_price = 23+randrange(8)
-    
-    ok = False
+    if kinggdom.stop == False:
 
-    while not ok:
-        print("How many acres to you want to buy at",
-              grain_price, "bushels/acre? ")
-        kingdom.acres_traded = int(input())
-        if kingdom.acres_traded > 0:
-            if grain_price * kingdom.acres_traded <= kingdom.grain:
-                kingdom.land_deals = -grain_price * kingdom.acres_traded
-                ok = True
-            else:
-                print("But there is insufficient grain.")
-        elif kingdom.acres_traded == 0:
-            ok = True
+        #make land deals
+        grain_price = 23+randrange(8)
+        
+        ok = False
 
-    grain_price = grain_price - 1
-
-    ok = False
-
-    while not ok:
-        print("How many acres to you want to sell at",
-              grain_price, "bushels/acre? ")
-        kingdom.acres_traded = int(input())
-        if kingdom.acres_traded > 0:
-            if kingdom.acres_traded <= kingdom.acres:
-                if kingdom.acres_traded < int(kingdom.acres / 10):
-                    kingdom.acres_traded = -kingdom.acres_traded
+        while not ok:
+            print("How many acres to you want to buy at",
+                grain_price, "bushels/acre? ")
+            kingdom.acres_traded = int(input())
+            if kingdom.acres_traded > 0:
+                if grain_price * kingdom.acres_traded <= kingdom.grain:
                     kingdom.land_deals = -grain_price * kingdom.acres_traded
                     ok = True
-            else:
-                print("But there is insufficient land.")
-        elif kingdom.acres_traded == 0:
-            ok = True
-    
-    ok = False
-
-    while not ok:
-        print("How many acres to you want to plant?")
-        kingdom.grain_planted = int(input())
-        if kingdom.grain_planted > 0:
-            if kingdom.grain_planted <= kingdom.acres + kingdom.acres_traded:
-                if kingdom.grain_planted <= kingdom.population * 10:
-                    ok = True
-            else:
-                print("But there are insufficient people.")
-        elif kingdom.grain_planted == 0:
-            ok = True
-
-    ok = False
-
-    while not ok:
-        print("How many bushels to you wish to use as food?")
-        kingdom.grain_food = int(input())
-        if kingdom.grain_food > 0:
-            if kingdom.grain + kingdom.land_deals - kingdom.grain_planted - kingdom.grain_food >= 0:
-                if kingdom.grain_food <= 40 * kingdom.population:
-                    kingdom.starvations = kingdom.population - int(kingdom.grain_food/40)
-                    kingdom.war_starvation = kingdom.war_starvation + kingdom.starvations
-                    ok = True
-
-    kingdom.yield_acre = 5 + randrange(4)
-
-    if int(kingdom.year/7) - int(kingdom.year/49*7) == kingdom.year:
-        kingdom.yield_acre = int(kingdom.yield_acre / 2)
-
-    ok = False
-
-    while not ok:
-        kingdom.cropyield = kingdom.yield_acre * kingdom.grain_planted
-
-        if kingdom.grain + kingdom.land_deals - kingdom.grain_planted - kingdom.grain_food + kingdom.cropyield >=0:
-            if randrange(99) < 25:
-                kingdom.grain_rats = int((kingdom.grain + kingdom.land_deals - kingdom.grain_food + kingdom.cropyield) / 10)
+                else:
+                    print("But there is insufficient grain.")
+            elif kingdom.acres_traded == 0:
                 ok = True
-        else:
-            kingdom.yield_acre = int((32767 - kingdom.grain - kingdom.land_deals + kingdom.grain_planted + kingdom.grain_food) / kingdom.grain_planted)
+
+        grain_price = grain_price - 1
+
+        ok = False
+
+        while not ok:
+            print("How many acres to you want to sell at",
+                grain_price, "bushels/acre? ")
+            kingdom.acres_traded = int(input())
+            if kingdom.acres_traded > 0:
+                if kingdom.acres_traded <= kingdom.acres:
+                    if kingdom.acres_traded < int(kingdom.acres / 10):
+                        kingdom.acres_traded = -kingdom.acres_traded
+                        kingdom.land_deals = -grain_price * kingdom.acres_traded
+                        ok = True
+                else:
+                    print("But there is insufficient land.")
+            elif kingdom.acres_traded == 0:
+                ok = True
+        
+        ok = False
+
+        while not ok:
+            print("How many acres to you want to plant?")
+            kingdom.grain_planted = int(input())
+            if kingdom.grain_planted > 0:
+                if kingdom.grain_planted <= kingdom.acres + kingdom.acres_traded:
+                    if kingdom.grain_planted <= kingdom.population * 10:
+                        ok = True
+                else:
+                    print("But there are insufficient people.")
+            elif kingdom.grain_planted == 0:
+                ok = True
+
+        ok = False
+
+        while not ok:
+            print("How many bushels to you wish to use as food?")
+            kingdom.grain_food = int(input())
+            if kingdom.grain_food > 0:
+                if kingdom.grain + kingdom.land_deals - kingdom.grain_planted - kingdom.grain_food >= 0:
+                    if kingdom.grain_food <= 40 * kingdom.population:
+                        kingdom.starvations = kingdom.population - int(kingdom.grain_food/40)
+                        kingdom.war_starvation = kingdom.war_starvation + kingdom.starvations
+                        ok = True
+
+        kingdom.yield_acre = 5 + randrange(4)
+
+        if int(kingdom.year/7) - int(kingdom.year/49*7) == kingdom.year:
+            kingdom.yield_acre = int(kingdom.yield_acre / 2)
+
+        ok = False
+
+        while not ok:
+            kingdom.cropyield = kingdom.yield_acre * kingdom.grain_planted
+
+            if kingdom.grain + kingdom.land_deals - kingdom.grain_planted - \
+                kingdom.grain_food + kingdom.cropyield >=0:
+                if randrange(99) < 25:
+                    kingdom.grain_rats = int((kingdom.grain + kingdom.land_deals - \
+                        kingdom.grain_food + kingdom.cropyield) / 10)
+                    ok = True
+            else:
+                kingdom.yield_acre = int((32767 - kingdom.grain - kingdom.land_deals + \
+                    kingdom.grain_planted + kingdom.grain_food) / kingdom.grain_planted)
+
+        if randrange(99) <= 15:
+            kingdom.war_probability = 25
+            print("A nearby kingdom threatens war.")
+
+
+            key = ""
+            while key != "Y" and key != "N":
+                key = input("Do you wish to make a pre-emptive strike? ")
+
+            if key == "Y": 
+                kingdom.war_probability = 100
+                kingdom.war_starvation = kingdom.war_starvation + 5
+            
+            ok = False
+
+            while not ok:
+                kingdom.input = input("How many mercenaries will you hire at 80 bushels each? ")
+                if int(kingdom.input) >= 0: ok = True
+
+            kingdom.naturaldeaths = kingdom.grain * \
+                kingdom.land_deals - kingdom.grain_planted - kingdom.grain_food * \
+                    kingdom.cropyield - kingdom.grain_rats
+            
+            if randrange(99) >= kingdom.war_probability:
+                print("Peace negotiations succeed.")
+            
+            else:
+                if kingdom.war_probability == 25:
+                    kingdom.war_probability = 150
+                
+                num = kingdom.population - kingdom.starvations
+                if kingdom.input <= num / 10:
+                    num = 3 * kingdom.war_probability / 5 * kingdom.input * kingdom.input / num * 100 / num
+                else:
+                    num = 3 * kingdom.war_probability / 5 * kingdom.input * 100 / num
+                    kingdom.war_casualties = int((kingdom.population - kingdom.starvations) / 2)
+                    kingdom.acres_wonlost = -int((kingdom.acres + acres_traded) / 2)
+                    kingdom.fruits_war = -int(kingdom.naturaldeaths / 2)
+
+                    if randrange(99) > cnt:
+                        print("You have lost the war.")
+                        kingdom.war_starvation = int(kingdom.war_starvation + 5000 / kingdom.war_probability)
+                    else:
+                        print("You have won the war.")
+                        kingdom.war_casualties = int(kingdom.war_casualties / 2)
+                        kingdom.acres_wonlost = -kingdom.acres_wonlost
+                        kingdom.fruits_war = int(kingdom.naturaldeaths / 4)
+
+            if kingdom.input * 80 > kingdom.naturaldeaths + kingdom.fruits_war:
+                print("There is insufficient grain to pay the mercenaries")
+                kingdom.looting_victims = int(3 * (kingdom.population - kingdom.starvations - kingdom.war_casualties) / 4)
+                kingdom.looting_losses = int(3 * (num + kingdom.fruits_war) / 4)
+            else:
+                kingdom.hire_mercenaries = kingdom.input * 80
+            
+        kingdom.input = kingdom.population - kingdom.starvations - kingdom.war_casualities - kingdom.looting_victims
+
+        if randrange(99) < 4:
+            print("The black plague strikes.")
+            print kingdom.disease_victims = int(kingdom.input / 2)
+        elif randrange(99) < 20:
+            print("A pox epidemic breaks out.")
+            kingdom.disease_victims = int(kingdom.input / 20)
+            kingdom.input = kingdom.input - kingdom.disease_victims
+
+        kingdom.births = int((kingdom.input * randrange(5) + 9) / 100) + 1
+        kingdom.naturaldeaths = int((kingdom.input * randrange(3) + 4) / 100)
+
+        if kingdom.year % 7 == 0:
+            print("Seven year locusts reduce crop yield.")
+        
+        if kingdom.grain_rats > 0:
+            print("Rats infest your silos.")
+
 
 def cls():
 
