@@ -33,6 +33,7 @@ def main():
     kingdom = State()
     init(kingdom)
     while kingdom.stop == False:
+        cls()
         state(kingdom)
 
 def init(kingdom):
@@ -162,9 +163,10 @@ def state(kingdom):
         print("The peasants tire of war and starvation. You are deposed.\n")
         kingdom.stop = True
 
-    if kingdom.population <= 1:
-        print("You and the remaining population retire in the Swiss Alps.\n")
-        kingdom.stop = True
+    if kingdom.stop == False:
+        if kingdom.population <= 1:
+            print("You and the remaining population retire in the Swiss Alps.\n")
+            kingdom.stop = True
 
     if kingdom.stop == False:
 
@@ -324,6 +326,8 @@ def state(kingdom):
         
         if kingdom.grain_rats > 0:
             print("Rats infest your silos.")
+
+        kingdom.year = kingdom.year + 8 
 
 
 def cls():
